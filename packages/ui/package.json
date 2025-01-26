@@ -1,0 +1,10 @@
+{
+  "name": "@repo/ui",
+  "private": true,
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  }
+}
