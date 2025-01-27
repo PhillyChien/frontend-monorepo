@@ -1,5 +1,5 @@
-import { Button, NumberInput } from '@repo/ui';
-import { add } from '@repo/utility';
+import { Button, NumberInput } from '@frontend-monorepo/ui';
+import { add } from '@frontend-monorepo/utility';
 import { useState } from 'react';
 
 function App() {

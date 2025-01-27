@@ -1,5 +1,5 @@
 {
-  "name": "shared-library",
+  "name": "frontend-monorepo",
   "version": "1.0.0",
   "description": "POC for using pnpm workspace in react projects",
   "private": true,

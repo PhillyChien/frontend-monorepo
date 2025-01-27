@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@frontend-monorepo/ui",
   "description": "",
   "main": "src/index.js",
   "scripts": {

@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
-    "@repo/utility": "workspace:*"
+    "@frontend-monorepo/ui": "workspace:*",
+    "@frontend-monorepo/utility": "workspace:*"
   }
 }
