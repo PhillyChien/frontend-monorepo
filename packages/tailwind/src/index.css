@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --shadow-3xl: 0 0 20px rgba(0, 0, 0, 0.3);
+  --shadow-4xl: 0 0 20px rgba(0, 0, 0, 0.4);
+  --shadow-5xl: 0 0 20px rgba(0, 0, 0, 0.5);
+}
