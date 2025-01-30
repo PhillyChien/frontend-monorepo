@@ -6,7 +6,10 @@
   "author": "",
   "license": "ISC",
   "exports": {
-    ".": "./src/index.css"
+    "default": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.css"
+    }
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.0",
