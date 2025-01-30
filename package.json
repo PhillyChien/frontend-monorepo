@@ -11,7 +11,8 @@
     "test:watch": "pnpm -r run test:watch",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "locales:compile": "pnpm run -F i18n ts-compile"
   },
   "keywords": [],
   "author": "",

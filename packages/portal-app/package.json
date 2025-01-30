@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@frontend-monorepo/i18n": "workspace:*",
+    "@frontend-monorepo/tailwind": "workspace:*",
     "@frontend-monorepo/ui": "workspace:*",
     "@frontend-monorepo/utility": "workspace:*",
-    "@frontend-monorepo/tailwind": "workspace:*"
+    "i18next-browser-languagedetector": "^8.0.2",
+    "react-i18next": "^15.4.0"
   }
 }
