@@ -1,5 +1,4 @@
 import { Button, NumberInput } from '@frontend-monorepo/ui';
-import { add } from '@frontend-monorepo/utility';
 import { useState } from 'react';
 
 function App() {
@@ -27,7 +26,7 @@ function App() {
         <Button
           color="primary"
           onClick={() => {
-            setResult(add(nums.x, nums.y));
+            setResult(nums.x + nums.y);
           }}
         >
           Calculate
