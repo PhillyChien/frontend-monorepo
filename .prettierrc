@@ -6,6 +6,7 @@
   "trailingComma": "es5",
   "bracketSpacing": true,
   "arrowParens": "always",
+  "endOfLine": "auto",
 
   "tailwindStylesheet": "./packages/tailwind/src/index.css",
   "tailwindFunctions": ["clsx", "cn", "cva", "twMerge"],
