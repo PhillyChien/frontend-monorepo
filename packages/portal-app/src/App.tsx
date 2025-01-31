@@ -1,4 +1,4 @@
-import { Button, NumberInput } from '@frontend-monorepo/ui';
+import { Button, Input } from '@frontend-monorepo/ui';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -17,33 +17,36 @@ function App() {
   }, [i18n, i18n.language]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen">
-      <div className="flex flex-col gap-4 w-full max-w-md shadow-4xl p-4 rounded-md">
-        <div className="text-2xl font-bold mb-8">{t('title')}</div>
-        <NumberInput
-          label="X"
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
+      <div className="shadow-4xl flex w-full max-w-md flex-col gap-4 rounded-md p-4">
+        <div className="mb-8 text-2xl font-bold">{t('title')}</div>
+        <Input
+          type="number"
+          placeholder="Enter X"
           value={nums.x}
-          onChange={(e) => setNums({ ...nums, x: parseInt(e.target.value) })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setNums({ ...nums, x: parseInt(e.target.value) })
+          }
         />
-        <NumberInput
-          label="Y"
+        <Input
+          type="number"
+          placeholder="Enter Y"
           value={nums.y}
-          onChange={(e) => setNums({ ...nums, y: parseInt(e.target.value) })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setNums({ ...nums, y: parseInt(e.target.value) })
+          }
         />
         <Button
-          color="primary"
+          size="lg"
+          variant="default"
           onClick={() => {
             setResult(nums.x + nums.y);
           }}
         >
           Calculate
         </Button>
-
-        <NumberInput label="Result" value={result} disabled />
+        <Input disabled type="number" value={result} />
       </div>
-
-      <button onClick={() => i18n.changeLanguage('fr')}>切換到法文</button>
-      <button onClick={() => i18n.changeLanguage('en')}>切換到英文</button>
     </div>
   );
 }

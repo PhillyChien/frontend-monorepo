@@ -18,8 +18,8 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      prettier: pluginPretter,
       'simple-import-sort': simpleImportSort,
+      prettier: pluginPretter,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,

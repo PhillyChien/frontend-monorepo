@@ -5,5 +5,10 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "arrowParens": "always"
+  "arrowParens": "always",
+
+  "tailwindStylesheet": "./packages/tailwind/src/index.css",
+  "tailwindFunctions": ["clsx", "cn", "cva", "twMerge"],
+
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
