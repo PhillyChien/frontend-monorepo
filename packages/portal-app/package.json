@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "tsc -b && vite build",
+    "dev": "vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview"
@@ -13,8 +13,6 @@
     "@frontend-monorepo/i18n": "workspace:*",
     "@frontend-monorepo/tailwind": "workspace:*",
     "@frontend-monorepo/ui": "workspace:*",
-    "@frontend-monorepo/utility": "workspace:*",
-    "i18next-browser-languagedetector": "^8.0.2",
-    "react-i18next": "^15.4.0"
+    "@frontend-monorepo/utility": "workspace:*"
   }
 }

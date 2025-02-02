@@ -1,19 +1,10 @@
 {
   "name": "@frontend-monorepo/tailwind",
-  "version": "1.0.0",
   "description": "Tailwind CSS for the frontend monorepo",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "exports": {
     "default": {
       "types": "./src/index.d.ts",
       "default": "./src/index.css"
     }
-  },
-  "dependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.0"
   }
 }
