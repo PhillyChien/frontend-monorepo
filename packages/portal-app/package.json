@@ -7,9 +7,11 @@
     "dev": "vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tsc": "tsc -b --verbose"
   },
   "dependencies": {
+    "@frontend-monorepo/backend-client": "workspace:*",
     "@frontend-monorepo/i18n": "workspace:*",
     "@frontend-monorepo/tailwind": "workspace:*",
     "@frontend-monorepo/ui": "workspace:*",
