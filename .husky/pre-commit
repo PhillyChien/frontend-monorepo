@@ -1,3 +1,5 @@
+pnpm sort-package-json
+
 pnpm format
 
 pnpm lint

@@ -14,12 +14,17 @@
     "locales:compile": "pnpm run -F i18n ts-compile",
     "portal-app:dev": "pnpm run -F portal-app dev",
     "prepare": "husky",
+    "sort-package-json": "npx sort-package-json 'package.json' 'packages/*/package.json' 'apps/*/package.json'",
     "storybook:dev": "pnpm run -F storybook dev",
     "test": "pnpm -r run test",
     "test:coverage": "pnpm -r run test:coverage",
     "test:watch": "pnpm -r run test:watch"
   },
   "dependencies": {
+    "@hookform/resolvers": "catalog:",
+    "@radix-ui/react-label": "catalog:",
+    "@radix-ui/react-select": "catalog:",
+    "@radix-ui/react-slot": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "axios": "catalog:",
@@ -31,10 +36,13 @@
     "postcss": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-hook-form": "catalog:",
     "react-i18next": "catalog:",
+    "react-router": "catalog:",
     "tailwind-merge": "catalog:",
     "tailwindcss": "catalog:",
-    "tailwindcss-animate": "catalog:"
+    "tailwindcss-animate": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "catalog:",
