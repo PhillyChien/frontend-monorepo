@@ -9,8 +9,8 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     conditions: mode === 'test' ? ['browser'] : [],
     alias: {
-      '@lib': path.resolve(__dirname, 'src/lib'),
-      '@components': path.resolve(__dirname, 'src/components'),
+      '@lib': path.resolve(__dirname, './src/lib'),
+      '@components': path.resolve(__dirname, './src/components'),
     },
   },
   test: {

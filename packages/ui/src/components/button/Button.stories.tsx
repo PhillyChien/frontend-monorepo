@@ -3,11 +3,13 @@ import { fn } from '@storybook/test';
 
 import { Button } from './Button';
 
-export const ActionsData = {
+export const ActionsData: {
+  onClick: () => void;
+} = {
   onClick: fn(),
 };
 
-const meta = {
+const meta: Meta<typeof Button> = {
   title: 'Button',
   component: Button,
   tags: ['autodocs'],
@@ -15,7 +17,7 @@ const meta = {
   args: {
     ...ActionsData,
   },
-} satisfies Meta<typeof Button>;
+};
 
 export default meta;
 type Story = StoryObj<typeof Button>;

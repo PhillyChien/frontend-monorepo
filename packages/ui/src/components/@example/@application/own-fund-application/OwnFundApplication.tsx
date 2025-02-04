@@ -1,0 +1,120 @@
+import {
+  ContactInfo,
+  contactInfoSchema,
+  ContactInfoSection,
+} from '@components/@example/@section/contact-info-section/ContactInfoSection';
+import {
+  FinancialInfo,
+  financialInfoSchema,
+} from '@components/@example/@section/financial-info-section/FinancialInfoSection';
+import { FundAmountSection } from '@components/@example/@section/fund-amount-section/FundAmountSection';
+import {
+  PersonalInfo,
+  personalInfoSchema,
+  PersonalInfoSection,
+} from '@components/@example/@section/personal-info-section/PersonalInfoSection';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Route, Routes, useNavigate } from 'react-router';
+import { z } from 'zod';
+
+import { OwnFundApplicationLayout } from './OwnFundApplication.layout';
+
+const userRoleSchema = z.enum(['admin', 'user', 'guest']);
+export type UserRole = z.infer<typeof userRoleSchema>;
+
+export type OwnFundApplicationData = {
+  userRole: UserRole;
+  personalInfo: PersonalInfo;
+  contactInfo: ContactInfo;
+  financialInfo: FinancialInfo;
+};
+
+const ownFundApplicationSchema = z
+  .object({
+    userRole: userRoleSchema,
+    personalInfo: personalInfoSchema,
+    contactInfo: contactInfoSchema,
+    financialInfo: financialInfoSchema,
+  })
+  .superRefine((data, ctx) => {
+    if (
+      data.userRole === 'admin' &&
+      (!data.contactInfo.phone || data.contactInfo.phone.trim() === '')
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Admin must provide a phone number',
+        path: ['contactInfo', 'phone'],
+      });
+    }
+  })
+  .superRefine((data, ctx) => {
+    if (data.userRole === 'admin' && data.personalInfo.firstName === 'Philly') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Admin cannot be Philly',
+        path: ['personalInfo', 'firstName'],
+      });
+    }
+  });
+
+const initialValues: OwnFundApplicationData = {
+  userRole: 'user',
+  personalInfo: {
+    firstName: '',
+    lastName: '',
+    age: 18,
+  },
+  contactInfo: {
+    email: '',
+    phone: '',
+  },
+  financialInfo: {
+    salary: 0,
+    expenses: 0,
+  },
+};
+
+export function OwnFundApplication() {
+  const navigate = useNavigate();
+  const form = useForm<OwnFundApplicationData>({
+    defaultValues: initialValues,
+    resolver: zodResolver(ownFundApplicationSchema),
+    mode: 'onBlur',
+  });
+  const onSubmit = (data: OwnFundApplicationData) => {
+    console.log('Successfully submitted', data);
+  };
+
+  return (
+    <Routes>
+      <Route element={<OwnFundApplicationLayout form={form} onSubmit={onSubmit} />}>
+        <Route
+          path="personal-info"
+          element={
+            <PersonalInfoSection onNext={() => navigate('../contact-info', { relative: 'path' })} />
+          }
+        />
+        <Route
+          path="contact-info"
+          element={
+            <ContactInfoSection
+              onBack={() => navigate('../personal-info', { relative: 'path' })}
+              onNext={() => navigate('../fund-amount', { relative: 'path' })}
+            />
+          }
+        />
+        <Route
+          path="fund-amount"
+          element={
+            <FundAmountSection
+              onBack={() => navigate('../contact-info', { relative: 'path' })}
+              onNext={() => navigate('../submit', { relative: 'path' })}
+            />
+          }
+        />
+      </Route>
+    </Routes>
+  );
+}
