@@ -1,13 +1,15 @@
 {
   "name": "@frontend-monorepo/i18n",
   "description": "",
+  "type": "module",
   "exports": {
-    "default": {
-      "types": "./src/@types/i18next.d.ts",
-      "default": "./src/index.ts"
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.ts"
     }
   },
   "main": "src/index.ts",
+  "source": "src/index.ts",
   "scripts": {
     "test": "vitest run",
     "ts-compile": "i18next-resources-for-ts interface -i ./locales/en -o ./src/@types/resources.d.ts"

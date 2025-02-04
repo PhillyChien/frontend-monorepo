@@ -4,6 +4,7 @@
 
     "lib": ["ES2020", "DOM"],
     /* Projects */
+    "composite": true,
     "incremental": true,
 
     /* Language and Environment */
@@ -19,7 +20,8 @@
     /* JavaScript Support */
 
     /* Emit */
-    "noEmit": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
     "outDir": "./dist",
 
     /* Interop Constraints */
@@ -32,7 +34,9 @@
     "strict": true,
 
     /* Completeness */
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    "baseUrl": "./src"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

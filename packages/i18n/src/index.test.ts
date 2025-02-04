@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import i18next from './i18n';
+import { i18next } from './i18n';
 
 describe('Check i18n works', () => {
   it('should be initialized', () => {
