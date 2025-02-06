@@ -30,6 +30,6 @@
       "@lib/*": ["./lib/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "../application-section/src/@example"],
   "exclude": ["node_modules", "dist"]
 }

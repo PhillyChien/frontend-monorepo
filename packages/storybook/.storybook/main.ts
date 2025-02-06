@@ -7,7 +7,8 @@ const config: StorybookConfig = {
   },
   stories: [
     '../../ui/src/**/*.stories.@(js|jsx|ts|tsx)',
-    '../../application/src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../application-form/src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../application-section/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
     '@storybook/addon-essentials',
