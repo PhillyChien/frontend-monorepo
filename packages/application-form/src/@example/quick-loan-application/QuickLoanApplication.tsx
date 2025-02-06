@@ -2,36 +2,30 @@ import {
   ContactInfo,
   contactInfoSchema,
   ContactInfoSection,
-} from '@components/@example/@section/contact-info-section/ContactInfoSection';
-import {
   FinancialInfo,
   financialInfoSchema,
-} from '@components/@example/@section/financial-info-section/FinancialInfoSection';
-import { FundAmountSection } from '@components/@example/@section/fund-amount-section/FundAmountSection';
-import {
+  FinancialInfoSection,
   PersonalInfo,
   personalInfoSchema,
   PersonalInfoSection,
-} from '@components/@example/@section/personal-info-section/PersonalInfoSection';
+} from '@frontend-monorepo/application-section';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Route, Routes, useNavigate } from 'react-router';
 import { z } from 'zod';
 
-import { OwnFundApplicationLayout } from './OwnFundApplication.layout';
+import { UserRole, userRoleSchema } from '..';
+import { QuickLoanApplicationLayout } from './QuickLoanApplication.layout';
 
-const userRoleSchema = z.enum(['admin', 'user', 'guest']);
-export type UserRole = z.infer<typeof userRoleSchema>;
-
-export type OwnFundApplicationData = {
+export type QuickLoanApplicationData = {
   userRole: UserRole;
   personalInfo: PersonalInfo;
   contactInfo: ContactInfo;
   financialInfo: FinancialInfo;
 };
 
-const ownFundApplicationSchema = z
+const quickLoanApplicationSchema = z
   .object({
     userRole: userRoleSchema,
     personalInfo: personalInfoSchema,
@@ -55,11 +49,12 @@ const ownFundApplicationSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: 'Admin cannot be Philly',
+        path: ['personalInfo', 'firstName'],
       });
     }
   });
 
-const initialValues: OwnFundApplicationData = {
+const initialValues: QuickLoanApplicationData = {
   userRole: 'user',
   personalInfo: {
     firstName: '',
@@ -76,20 +71,20 @@ const initialValues: OwnFundApplicationData = {
   },
 };
 
-export function OwnFundApplication() {
+export function QuickLoanApplication() {
   const navigate = useNavigate();
   const [ready, setReady] = useState(false);
-  const form = useForm<OwnFundApplicationData>({
+  const form = useForm<QuickLoanApplicationData>({
     defaultValues: async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const data = initialValues;
       setReady(true);
       return data;
     },
-    resolver: zodResolver(ownFundApplicationSchema),
+    resolver: zodResolver(quickLoanApplicationSchema),
     mode: 'onBlur',
   });
-  const onSubmit = (data: OwnFundApplicationData) => {
+  const onSubmit = (data: QuickLoanApplicationData) => {
     console.log('Successfully submitted', data);
   };
 
@@ -108,14 +103,15 @@ export function OwnFundApplication() {
       element: (
         <ContactInfoSection
           onBack={() => navigate('../personal-info', { relative: 'path' })}
-          onNext={() => navigate('../fund-amount', { relative: 'path' })}
+          onNext={() => navigate('../financial-info', { relative: 'path' })}
         />
       ),
     },
     {
-      path: 'fund-amount',
+      path: 'financial-info',
       element: (
-        <FundAmountSection
+        <FinancialInfoSection
+          personalInfo={form.getValues('personalInfo')}
           onBack={() => navigate('../contact-info', { relative: 'path' })}
           onNext={() => navigate('../submit', { relative: 'path' })}
         />
@@ -125,7 +121,7 @@ export function OwnFundApplication() {
 
   return (
     <Routes>
-      <Route element={<OwnFundApplicationLayout form={form} onSubmit={onSubmit} ready={ready} />}>
+      <Route element={<QuickLoanApplicationLayout form={form} onSubmit={onSubmit} ready={ready} />}>
         {routes.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}

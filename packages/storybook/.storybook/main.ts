@@ -5,7 +5,10 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  stories: ['../../ui/src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    '../../ui/src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../application/src/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',

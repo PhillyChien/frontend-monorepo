@@ -1,8 +1,8 @@
-import { FormField, FormMessage } from '@components/form/Form';
-import { FormControl, FormItem, FormLabel } from '@components/form/Form';
-import { SelectGroup, SelectItem } from '@components/select';
-import { SelectContent, SelectTrigger } from '@components/select/Select';
-import { Skeleton } from '@components/skeleton';
+import { FormField, FormMessage } from '@frontend-monorepo/ui';
+import { FormControl, FormItem, FormLabel } from '@frontend-monorepo/ui';
+import { SelectGroup, SelectItem } from '@frontend-monorepo/ui';
+import { SelectContent, SelectTrigger } from '@frontend-monorepo/ui';
+import { Skeleton } from '@frontend-monorepo/ui';
 import { SelectLabel, SelectValue } from '@radix-ui/react-select';
 import { Select } from '@radix-ui/react-select';
 import { FormProvider, UseFormReturn } from 'react-hook-form';

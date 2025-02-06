@@ -1,0 +1,23 @@
+{
+  "name": "@frontend-monorepo/application-form",
+  "description": "",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "tsc": "tsc -b --verbose"
+  },
+  "dependencies": {
+    "@frontend-monorepo/application-section": "workspace:*",
+    "@frontend-monorepo/ui": "workspace:*"
+  }
+}
