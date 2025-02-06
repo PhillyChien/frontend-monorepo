@@ -1,12 +1,13 @@
 import { parseJwtExpiryMs } from '@frontend-monorepo/utility';
 import axios, { type AxiosInstance } from 'axios';
 
-import { type RefreshTokenCallback, RefreshTokenScheduler } from './RefreshTokenScheduler';
+import { type Refresher, RefreshTokenScheduler } from './RefreshTokenScheduler';
 
 export type ApiClientOptions = {
   baseUrl: string;
-  refreshTokenCallback: RefreshTokenCallback;
+
   refreshTokenThresholdMs: number;
+  refreshTokenCallback: Refresher;
 };
 
 export default class ApiClient {

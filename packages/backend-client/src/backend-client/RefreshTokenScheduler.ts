@@ -1,15 +1,15 @@
-export type RefreshTokenCallback = () => Promise<string>;
+export type Refresher = () => Promise<string>;
 
 export interface RefreshTokenSchedulerOptions {
   expireThresholdMs: number;
-  refreshTokenCallback: RefreshTokenCallback;
+  refreshTokenCallback: Refresher;
 }
 
 export class RefreshTokenScheduler {
   private refreshTimerId: ReturnType<typeof setInterval> | null = null;
   private expireThresholdMs: number;
 
-  refreshTokenCallback: RefreshTokenCallback;
+  refreshTokenCallback: Refresher;
 
   constructor({
     expireThresholdMs = 30 * 1000, // Default to 30 seconds
