@@ -14,6 +14,7 @@ import {
   PersonalInfoSection,
 } from '@components/@example/@section/personal-info-section/PersonalInfoSection';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Route, Routes, useNavigate } from 'react-router';
 import { z } from 'zod';
@@ -78,8 +79,14 @@ const initialValues: QuickLoanApplicationData = {
 
 export function QuickLoanApplication() {
   const navigate = useNavigate();
+  const [ready, setReady] = useState(false);
   const form = useForm<QuickLoanApplicationData>({
-    defaultValues: initialValues,
+    defaultValues: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const data = initialValues;
+      setReady(true);
+      return data;
+    },
     resolver: zodResolver(quickLoanApplicationSchema),
     mode: 'onBlur',
   });
@@ -87,34 +94,43 @@ export function QuickLoanApplication() {
     console.log('Successfully submitted', data);
   };
 
+  const routes: {
+    path: string;
+    element: React.ReactNode;
+  }[] = [
+    {
+      path: 'personal-info',
+      element: (
+        <PersonalInfoSection onNext={() => navigate('../contact-info', { relative: 'path' })} />
+      ),
+    },
+    {
+      path: 'contact-info',
+      element: (
+        <ContactInfoSection
+          onBack={() => navigate('../personal-info', { relative: 'path' })}
+          onNext={() => navigate('../financial-info', { relative: 'path' })}
+        />
+      ),
+    },
+    {
+      path: 'financial-info',
+      element: (
+        <FinancialInfoSection
+          personalInfo={form.getValues('personalInfo')}
+          onBack={() => navigate('../contact-info', { relative: 'path' })}
+          onNext={() => navigate('../submit', { relative: 'path' })}
+        />
+      ),
+    },
+  ];
+
   return (
     <Routes>
-      <Route element={<QuickLoanApplicationLayout form={form} onSubmit={onSubmit} />}>
-        <Route
-          path="personal-info"
-          element={
-            <PersonalInfoSection onNext={() => navigate('../contact-info', { relative: 'path' })} />
-          }
-        />
-        <Route
-          path="contact-info"
-          element={
-            <ContactInfoSection
-              onBack={() => navigate('../personal-info', { relative: 'path' })}
-              onNext={() => navigate('../financial-info', { relative: 'path' })}
-            />
-          }
-        />
-        <Route
-          path="financial-info"
-          element={
-            <FinancialInfoSection
-              personalInfo={form.getValues('personalInfo')}
-              onBack={() => navigate('../contact-info', { relative: 'path' })}
-              onNext={() => navigate('../submit', { relative: 'path' })}
-            />
-          }
-        />
+      <Route element={<QuickLoanApplicationLayout form={form} onSubmit={onSubmit} ready={ready} />}>
+        {routes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
       </Route>
     </Routes>
   );

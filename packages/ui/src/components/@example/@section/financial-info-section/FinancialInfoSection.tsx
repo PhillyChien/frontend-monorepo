@@ -8,10 +8,21 @@ import { z } from 'zod';
 import { PersonalInfo } from '../personal-info-section/PersonalInfoSection';
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const financialInfoSchema = z.object({
-  salary: z.coerce.number().min(0, { message: 'Salary must be greater than 0' }),
-  expenses: z.coerce.number().min(0, { message: 'Expenses must be greater than 0' }),
-});
+export const financialInfoSchema = z
+  .object({
+    salary: z.coerce.number().min(0, { message: 'Salary must be greater than 0' }),
+    expenses: z.coerce.number().min(0, { message: 'Expenses must be greater than 0' }),
+  })
+  .superRefine((data, ctx) => {
+    if (data.salary - data.expenses < 10000) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Total income must be more than 10000. Current total: ' + (data.salary - data.expenses),
+        path: ['salary'],
+      });
+    }
+  });
 
 export type FinancialInfo = z.infer<typeof financialInfoSchema>;
 
@@ -52,7 +63,7 @@ export function FinancialInfoSection({ personalInfo, onBack, onNext }: Financial
   return (
     <fieldset>
       <h2 className="text-lg font-semibold">
-        {personalInfo.firstName} {personalInfo.lastName}
+        {personalInfo?.firstName} {personalInfo?.lastName}
       </h2>
       <FormField
         control={control}
@@ -61,7 +72,7 @@ export function FinancialInfoSection({ personalInfo, onBack, onNext }: Financial
           <FormItem>
             <FormLabel>Salary</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your salary" type="number" defaultValue={0} {...field} />
+              <Input placeholder="Enter your salary" type="number" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -74,7 +85,7 @@ export function FinancialInfoSection({ personalInfo, onBack, onNext }: Financial
           <FormItem>
             <FormLabel>Expenses</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your expenses" type="number" defaultValue={0} {...field} />
+              <Input placeholder="Enter your expenses" type="number" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

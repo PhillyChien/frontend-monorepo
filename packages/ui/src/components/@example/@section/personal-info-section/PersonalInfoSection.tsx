@@ -5,14 +5,24 @@ import { useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const personalInfoSchema = z.object({
-  firstName: z.string().min(1, { message: 'Please enter your first name' }),
-  lastName: z.string().min(1, { message: 'Please enter your last name' }),
-  age: z
-    .number({ invalid_type_error: 'Age must be a number' })
-    .int({ message: 'Age must be an integer' })
-    .min(18, { message: 'Must be at least 18 years old' }),
-});
+export const personalInfoSchema = z
+  .object({
+    firstName: z.string().min(1, { message: 'Please enter your first name' }),
+    lastName: z.string().min(1, { message: 'Please enter your last name' }),
+    age: z
+      .number({ invalid_type_error: 'Age must be a number' })
+      .int({ message: 'Age must be an integer' })
+      .min(18, { message: 'Must be at least 18 years old' }),
+  })
+  .superRefine((data, ctx) => {
+    if (data.firstName === 'L') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Admin cannot be L',
+        path: ['global'],
+      });
+    }
+  });
 
 export type PersonalInfo = z.infer<typeof personalInfoSchema>;
 
