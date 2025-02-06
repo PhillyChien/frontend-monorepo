@@ -4,3 +4,4 @@ build
 coverage
 *-lock.*
 *.lock
+storybook-static
