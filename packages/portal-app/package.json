@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -b && vite build",
+    "clean": "rimraf dist",
     "dev": "vite",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
